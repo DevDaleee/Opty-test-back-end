@@ -10,7 +10,7 @@ import { CashflowModule } from './cashflow/cashflow.module';
 
 @Module({
 
-  imports: [PrismaModule, UserModule, CashflowModule, AuthModule],
+  imports: [PrismaModule, UserModule, CashflowModule, AuthModule, UserModule],
   controllers: [AppController],
   providers: [
     AppService,
@@ -20,4 +20,4 @@ import { CashflowModule } from './cashflow/cashflow.module';
     },
   ],
 })
-export class AppModule {}
+export class AppModule { }
