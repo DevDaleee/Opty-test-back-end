@@ -11,10 +11,20 @@ generator client {
 }
 
 model User {
-  id Int @id @default(autoincrement())
+  id            Int        @id @default(autoincrement())
+  email         String     @unique
+  password      String
+  name          String
+  cashFlow_data CashFlow[] // Define relação com CashFlow
+}
 
-  email    String @unique
-  password String
+model CashFlow {
+  id          String  @id @default(uuid())
+  reason      String
+  description String? // Corrigido para 'description'
+  category    String // Substituído enum Categories por String
+  isCashIn    Boolean @default(true)
 
-  name String
+  userId Int // Relaciona com o ID do User
+  user   User @relation(fields: [userId], references: [id])
 }
