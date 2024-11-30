@@ -10,7 +10,8 @@ export class UserController {
   constructor(private readonly userService: UserService) { }
 
   @IsPublic()
-  @Post()
+  @HttpCode(HttpStatus.CREATED)
+  @Post('register')
   create(@Body() createUserDto: CreateUserDto) {
     return this.userService.create(createUserDto);
   }
@@ -26,5 +27,4 @@ export class UserController {
   findOne(@CurrentUser() id: User) {
     return this.userService.findOne(id['id']);
   }
-
 }

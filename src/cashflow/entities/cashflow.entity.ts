@@ -4,4 +4,5 @@ export class CashFlow {
     description: string;
     category: string;
     isCashIn: boolean;
+    createdAt: Date;
 }

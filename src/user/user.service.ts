@@ -7,7 +7,7 @@ import { User } from './entities/user.entity';
 
 @Injectable()
 export class UserService {
-  constructor(private readonly prisma: PrismaService) { }
+  constructor(private readonly prisma: PrismaService) {}
 
   async create(createUserDto: CreateUserDto): Promise<User> {
     const data: Prisma.UserCreateInput = {
@@ -28,6 +28,6 @@ export class UserService {
   }
 
   findOne(id: number) {
-    return this.prisma.user.findUnique({ where: { id } })
+    return this.prisma.user.findUnique({ where: { id } });
   }
 }

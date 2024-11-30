@@ -19,12 +19,12 @@ model User {
 }
 
 model CashFlow {
-  id          String  @id @default(uuid())
+  id          String   @id @default(uuid())
   reason      String
   description String? // Corrigido para 'description'
   category    String // Substituído enum Categories por String
-  isCashIn    Boolean @default(true)
-
-  userId Int // Relaciona com o ID do User
-  user   User @relation(fields: [userId], references: [id])
+  isCashIn    Boolean  @default(true)
+  createdAt   DateTime @default(now()) // Automatically sets creation timestamp
+  userId      Int // Relaciona com o ID do User
+  user        User     @relation(fields: [userId], references: [id])
 }
