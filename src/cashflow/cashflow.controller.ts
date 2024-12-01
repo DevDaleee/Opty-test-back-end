@@ -1,6 +1,7 @@
 import { Controller, Post, Body, Request, UseGuards, HttpCode, HttpStatus, Get, Param } from '@nestjs/common';
 import { CashflowService } from './cashflow.service';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { CashFlowResponseDto, CreateCashFlowDto } from './dto/cashflow.dto';
 
 @Controller('cashflow')
 export class CashflowController {
@@ -11,10 +12,10 @@ export class CashflowController {
     @Post('add')
     async addCashFlow(
         @Request() req,
-        @Body() cashFlowData: { reason: string; description?: string; category: string; isCashIn: boolean },
-    ) {
+        @Body() createCashFlowDto: CreateCashFlowDto,
+    ): Promise<CashFlowResponseDto> {
         const userId = req.user.id;
-        return this.cashflowService.addCashFlow(userId, cashFlowData);
+        return this.cashflowService.addCashFlow(userId, createCashFlowDto);
     }
 
     @HttpCode(HttpStatus.OK)

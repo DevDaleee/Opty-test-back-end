@@ -11,7 +11,7 @@ generator client {
 }
 
 model User {
-  id            Int        @id @default(autoincrement())
+  id            String     @id @default(uuid())
   email         String     @unique
   password      String
   name          String
@@ -23,8 +23,9 @@ model CashFlow {
   reason      String
   description String? // Corrigido para 'description'
   category    String // Substituído enum Categories por String
+  amount      Float
   isCashIn    Boolean  @default(true)
   createdAt   DateTime @default(now()) // Automatically sets creation timestamp
-  userId      Int // Relaciona com o ID do User
+  userId      String // Relaciona com o ID do User
   user        User     @relation(fields: [userId], references: [id])
 }
