@@ -1,6 +1,7 @@
 import { ForbiddenException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateCashFlowDto } from './dto/cashflow.dto';
+import { UpdateCashFlowDto } from './dto/update-cashflow.dto';
 
 @Injectable()
 export class CashflowService {
@@ -38,6 +39,31 @@ export class CashflowService {
         return await this.prisma.cashFlow.delete({
             where: { id: cashFlowId },
         });
+    }
+
+    async updateCashFlow(
+        userId: string,
+        cashFlowId: string,
+        updateData: UpdateCashFlowDto,  
+    ) {
+        const cashFlow = await this.prisma.cashFlow.findUnique({
+            where: { id: cashFlowId },
+        });
+
+        if (!cashFlow) {
+            throw new NotFoundException('CashFlow item not found');
+        }
+
+        if (cashFlow.userId !== userId) {
+            throw new ForbiddenException('You are not allowed to update this item');
+        }
+
+        const updatedCashFlow = await this.prisma.cashFlow.update({
+            where: { id: cashFlowId },
+            data: { ...updateData },
+        });
+
+        return updatedCashFlow;
     }
 
     async getCashFlowsByUser(userId: string) {
