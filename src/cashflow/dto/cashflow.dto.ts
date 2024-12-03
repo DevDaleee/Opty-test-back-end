@@ -1,4 +1,5 @@
-import { IsBoolean, IsNotEmpty, IsOptional, IsString, IsNumber, Min } from 'class-validator';
+import { Type } from 'class-transformer';
+import { IsBoolean, IsNotEmpty, IsOptional, IsString, IsNumber, Min, IsDate } from 'class-validator';
 
 export class CreateCashFlowDto {
     @IsNotEmpty()
@@ -21,8 +22,12 @@ export class CreateCashFlowDto {
     @IsNotEmpty()
     @IsBoolean()
     isCashIn: boolean;
-}
 
+    @IsOptional()
+    @Type(() => Date) 
+    @IsDate()
+    createdAt?: Date; // Data opcional
+}
 export class CashFlowResponseDto {
     id: string;
     reason: string;

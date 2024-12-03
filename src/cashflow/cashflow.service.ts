@@ -12,12 +12,15 @@ export class CashflowService {
         if (!userExists) {
             throw new UnauthorizedException('User not found');
         }
+        const currentDate = new Date();
         const newCashFlow = await this.prisma.cashFlow.create({
             data: {
                 ...cashFlowData,
+                createdAt: cashFlowData.createdAt || currentDate,
                 userId,
             },
         });
+
         return newCashFlow;
     }
 
