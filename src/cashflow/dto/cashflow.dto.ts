@@ -26,7 +26,7 @@ export class CreateCashFlowDto {
     @IsOptional()
     @Type(() => Date) 
     @IsDate()
-    createdAt?: Date; // Data opcional
+    createdAt?: Date; 
 }
 export class CashFlowResponseDto {
     id: string;

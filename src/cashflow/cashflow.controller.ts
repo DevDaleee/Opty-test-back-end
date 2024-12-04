@@ -1,7 +1,8 @@
-import { Controller, Post, Body, Request, UseGuards, HttpCode, HttpStatus, Get, Param } from '@nestjs/common';
+import { Controller, Post, Body, Request, UseGuards, HttpCode, HttpStatus, Get, Param, Put } from '@nestjs/common';
 import { CashflowService } from './cashflow.service';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { CashFlowResponseDto, CreateCashFlowDto } from './dto/cashflow.dto';
+import { UpdateCashFlowDto } from './dto/update-cashflow.dto';
 
 @Controller('cashflow')
 export class CashflowController {
@@ -40,5 +41,21 @@ export class CashflowController {
     async getCashFlowById(@Request() req, @Param('id') cashFlowId: string) {
         const userId = req.user.id;
         return this.cashflowService.getCashFlowById(userId, cashFlowId);
+    }
+
+    @HttpCode(HttpStatus.OK)
+    @UseGuards(JwtAuthGuard)
+    @Put(':id')
+    async updateCashFlow(
+        @Request() req,
+        @Param('id') cashFlowId: string,
+        @Body() updateCashFlowDto: UpdateCashFlowDto,
+    ): Promise<CashFlowResponseDto> {
+        const userId = req.user.id;
+        return this.cashflowService.updateCashFlow(
+            userId,
+            cashFlowId,
+            updateCashFlowDto,
+        );
     }
 }
