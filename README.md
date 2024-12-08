@@ -45,18 +45,15 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-## Run tests
+## Crie o Env para o projeto
 
 ```bash
-# unit tests
-$ npm run test
 
-# e2e tests
-$ npm run test:e2e
+JWT_SECRET="Um Token JWT para funciona a autenticação"
 
-# test coverage
-$ npm run test:cov
+DATABASE_URL="Link para o seu db sqlite"
 ```
+Quanto ao banco dados, basta criar um arquivo sqlite comum sqlite.db.
 
 ## Deployment
 
@@ -93,6 +90,7 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 - Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
 - Website - [https://nestjs.com](https://nestjs.com/)
 - Twitter - [@nestframework](https://twitter.com/nestframework)
+  
 
 ## License
 
